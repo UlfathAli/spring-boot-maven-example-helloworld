@@ -1,14 +1,14 @@
 pipeline {
     agent any
+
     tools {
-        withMaven {
-        maven 'apache-maven-3.5.4' 
+        maven 'M3'
     }
+
     stages {
-        stage('Example') {
+        stage('Build') {
             steps {
-                withMaven {
-                sh 'mvn --version'
+                sh 'mvn -B package'
             }
         }
     }
