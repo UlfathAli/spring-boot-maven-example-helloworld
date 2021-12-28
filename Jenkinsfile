@@ -1,15 +1,11 @@
-pipeline {
-    agent any
+node {
+    def mvnHome = tool 'M3'
 
-    tools {
-        maven 'M3'
+    stage('Checkout') {
+        checkout scm
     }
 
-    stages {
-        stage('Build') {
-            steps {
-                sh 'mvn -B package'
-            }
-        }
+    stage('Build') {
+        sh "${mvnHome}/bin/mvn -B package"
     }
 }
