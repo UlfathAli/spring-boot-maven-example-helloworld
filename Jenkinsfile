@@ -1,15 +1,13 @@
 pipeline {
-    agent any
-    stages {
-        stage ('Build') {
-            steps {
-                sh 'echo Hello Build stage'
-            }
-        }
-        stage ('Test') {
-            steps {
-                sh 'echo hello Test stage'
-            }
-        }
+  agent any
+  tools {
+    maven 'maven-3.6.3' 
+  }
+  stages {
+    stage ('Build') {
+      steps {
+        sh 'mvn clean package'
+      }
     }
+  }
 }
