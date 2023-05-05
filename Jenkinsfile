@@ -1,11 +1,17 @@
-node {
-    def mvnHome = tool 'M3'
-
-    stage('Checkout') {
-        checkout scm
-    }
-
-    stage('Build') {
-        sh "${mvnHome}/bin/mvn -B package"
+pipeline {
+     agent any
+     stages {
+        stage("Build") {
+            steps {
+                sh "sudo npm install"
+                sh "sudo npm run build"
+            }
+        }
+        stage("Deploy") {
+            steps {
+                sh "sudo rm -rf /var/www/jenkins-react-app"
+                sh "sudo cp -r ${WORKSPACE}/build/ /var/www/jenkins-react-app/"
+            }
+        }
     }
 }
